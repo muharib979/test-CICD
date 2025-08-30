@@ -1,0 +1,21 @@
+name: Git Actiions CI/CD
+
+on:
+  push:
+    branches:
+       - master
+
+  pull_request:
+     branches:
+        - master
+
+
+jobs:
+  read_hello_file:
+     runs-on: ubuntu-latest
+     steps:
+        - name: Git Clone
+          uses: actions/checkout@v2
+
+        - name: Read hello.txt
+          run: cat hello.txt
