@@ -1,21 +1,21 @@
-name: Git Actiions CI/CD
+name: CICD Pipelines
 
-on:
-  push:
-    branches:
-       - main
-
-  pull_request:
-     branches:
-        - main
-
+on: [push]
 
 jobs:
-  read_hello_file:
-     runs-on: ubuntu-latest
-     steps:
-        - name: Git Clone
-          uses: actions/checkout@v2
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-        - name: Read hello.txt
-          run: cat hello.txt
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm run check
